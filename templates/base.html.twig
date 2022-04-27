@@ -22,7 +22,7 @@
             <div>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="{{ path('app_user_show', {'id': user.id}) }}">{{userName}}</a></li>
+                    <li><a href="/">{{userName}}</a></li>
                     <li><a class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none" href="{{ path('app_post_index') }}">Posts</a></li>
                     <li><a class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none" href="{{ path('app_photo_index') }}">Photos</a></li>
                     {% if is_granted('ROLE_ADMIN') %}
