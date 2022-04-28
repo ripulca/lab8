@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Photo;
 use App\Form\PhotoType;
 use App\Repository\PhotoRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/photo')]
 class PhotoController extends AbstractController
@@ -16,10 +17,9 @@ class PhotoController extends AbstractController
     #[Route('/', name: 'app_photo_index', methods: ['GET'])]
     public function index(PhotoRepository $photoRepository): Response
     {
-        $session = $request->getSession();
-        if (!$session->isStarted()) {
-            $session->start();
-        }
+        $session = new Session();
+        $session->start();
+
         $name = $session->get('name') ?? null;
         return $this->render('photo/index.html.twig', [
             'photos' => $photoRepository->findAll(),
@@ -52,7 +52,7 @@ class PhotoController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_photo_show', methods: ['GET'])]
-    public function show(Photo $photo): Response
+    public function show(Request $request, Photo $photo): Response
     {
         $session = $request->getSession();
         if (!$session->isStarted()) {
