@@ -15,9 +15,9 @@ class AppFixtures extends Fixture
         // create 20 obj! Bam!
         for ($i = 0; $i < 21; $i++) {
             $user = new User();
-            $user->setName('user '.$i);
+            $user->setName('user_'.$i);
             $user->setEmail('user_'.$i.'@example.com');
-            $user->setPassword('pwd____'.$i);
+            $user->setPassword(password_hash('pwd____'.$i, PASSWORD_DEFAULT));
             $user->setPhone('+89001239'.$i);
             if($i<20){
                 $user->setRoles(['ROLE_USER']);
