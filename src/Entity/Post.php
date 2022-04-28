@@ -6,6 +6,7 @@ use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
@@ -102,5 +103,9 @@ class Post
         }
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->comment;
     }
 }

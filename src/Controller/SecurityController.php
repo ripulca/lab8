@@ -24,9 +24,18 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
+    private function closeCurrentSession(TokenStorageInterface $tokenStorage, Request $request)
+{
+        $token = new AnonymousToken('default', 'anon.');
+        $tokenStorage->setToken($token);
+        $request->getSession()->invalidate();
+        throw new AccessDeniedException();
+}
+
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
+        $this->closeCurrentSession();
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

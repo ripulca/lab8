@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PhotoRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PhotoRepository::class)]
 class Photo
@@ -89,5 +90,9 @@ class Photo
         $this->format = $format;
 
         return $this;
+    }
+    
+    public function __toString() {
+        return $this->name;
     }
 }

@@ -18,7 +18,7 @@ class PhotoController extends AbstractController
     public function index(PhotoRepository $photoRepository): Response
     {
         $session = new Session();
-        $session->start();
+        // $session->start();
 
         $name = $session->get('name') ?? null;
         return $this->render('photo/index.html.twig', [
